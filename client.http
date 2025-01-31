@@ -35,3 +35,10 @@ Authorization: Bearer {{authToken}}
   "title": "New question",
   "content": "Question content"
 }
+
+###
+
+# @name fetch_recent_questions
+GET {{BASE_URL}}/questions?page=1
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
