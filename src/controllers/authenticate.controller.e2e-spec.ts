@@ -1,6 +1,6 @@
 import { AppModule } from '@/app.module';
 import { PrismaService } from '@/prisma/prisma.service';
-import { JohnDoeInformations } from '@/utils/fake_users';
+import { FakeUser } from '@/utils/fake-data';
 import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { hash } from 'bcryptjs';
@@ -24,14 +24,14 @@ describe('Authenticate (E2E)', () => {
   test('[POST] /sessions', async () => {
     await prisma.user.create({
       data: {
-        ...JohnDoeInformations,
-        password: await hash(JohnDoeInformations.password, 8),
+        ...FakeUser,
+        password: await hash(FakeUser.password, 8),
       },
     });
 
     const response = await request(app.getHttpServer())
       .post('/sessions')
-      .send(JohnDoeInformations);
+      .send(FakeUser);
 
     expect(response.statusCode).toBe(201);
 

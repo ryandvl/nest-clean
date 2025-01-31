@@ -1,6 +1,6 @@
 import { AppModule } from '@/app.module';
 import { PrismaService } from '@/prisma/prisma.service';
-import { JohnDoeInformations } from '@/utils/fake_users';
+import { FakeUser } from '@/utils/fake-data';
 import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import request from 'supertest';
@@ -23,13 +23,13 @@ describe('Create account (E2E)', () => {
   test('[POST] /accounts', async () => {
     const response = await request(app.getHttpServer())
       .post('/accounts')
-      .send(JohnDoeInformations);
+      .send(FakeUser);
 
     expect(response.statusCode).toBe(201);
 
     const userOnDatabase = await prisma.user.findUnique({
       where: {
-        email: JohnDoeInformations.email,
+        email: FakeUser.email,
       },
     });
 
