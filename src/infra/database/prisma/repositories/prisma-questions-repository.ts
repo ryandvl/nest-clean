@@ -24,10 +24,12 @@ export class PrismaQuestionsRepository implements AsyncQuestionsRepository {
   }
 
   async findBySlug(slug: string): Promise<Question | null> {
+    await Promise.all([]);
     throw new Error('Method not implemented.');
   }
 
   async findManyRecent(params: PaginationParams): Promise<Question[]> {
+    await Promise.all([]);
     throw new Error('Method not implemented.');
   }
 
