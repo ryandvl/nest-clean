@@ -42,7 +42,7 @@ describe('Delete Question', () => {
       }),
     );
 
-    sut.execute({
+    void sut.execute({
       questionId: 'question-1',
       authorId: 'author-1',
     });

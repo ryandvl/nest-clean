@@ -43,7 +43,7 @@ describe('Choose Question Best Answer', () => {
     inMemoryQuestionsRepository.create(question);
     inMemoryAnswersRepository.create(answer);
 
-    sut.execute({
+    void sut.execute({
       answerId: answer.id.toString(),
       authorId: question.authorId.toString(),
     });

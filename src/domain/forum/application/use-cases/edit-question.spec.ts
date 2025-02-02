@@ -45,7 +45,7 @@ describe('Edit Question', () => {
       }),
     );
 
-    sut.execute({
+    void sut.execute({
       questionId: newQuestion.id.toValue(),
       authorId: 'author-1',
       title: 'Test question',
