@@ -4,7 +4,7 @@ import { Question } from '@/domain/forum/enterprise/entities/question';
 export abstract class QuestionsRepository {
   abstract findById(id: string): Question | null;
   abstract findBySlug(slug: string): Question | null;
-  abstract findManyRecent(params: PaginationParams): Question[];
+  abstract findManyRecent(params: PaginationParams): Promise<Question[]>;
   abstract save(question: Question): void;
   abstract create(question: Question): void;
   abstract delete(question: Question): void;
