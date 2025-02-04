@@ -8,10 +8,15 @@ import {
   PrismaQuestionCommentsRepository,
   PrismaQuestionsRepository,
 } from './prisma/repositories';
+import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository';
 
 @Module({
   providers: [
     PrismaService,
+    {
+      provide: QuestionsRepository,
+      useClass: PrismaQuestionsRepository,
+    },
     PrismaAnswerAttachmentsRepository,
     PrismaAnswerCommentsRepository,
     PrismaAnswersRepository,
@@ -27,7 +32,7 @@ import {
     PrismaAnswersRepository,
     PrismaQuestionAttachmentsRepository,
     PrismaQuestionCommentsRepository,
-    PrismaQuestionsRepository,
+    QuestionsRepository,
   ],
 })
 export class DatabaseModule {}
