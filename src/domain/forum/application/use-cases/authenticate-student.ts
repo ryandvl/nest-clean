@@ -1,9 +1,6 @@
 import { Either, left, right } from '@/core/either';
 import { Injectable } from '@nestjs/common';
-import { Student } from '../../enterprise/entities/student';
 import { StudentsRepository } from '../repositories/students-repository';
-import { HashGenerator } from '../cryptography/hash-generator';
-import { StudentAlreadyExistsError } from './errors/student-already-exists-error';
 import { HashComparer } from '../cryptography/hash-comparer';
 import { Encrypter } from '../cryptography/encrypter';
 import { WrongCredentialsError } from './errors/wrong-credentials-error';
@@ -38,7 +35,7 @@ export class AuthenticateStudentUseCase {
       return left(new WrongCredentialsError());
     }
 
-    const isPasswordValid = await this.hashComparer.compare(
+    const isPasswordValid = this.hashComparer.compare(
       password,
       student.password,
     );
@@ -47,7 +44,7 @@ export class AuthenticateStudentUseCase {
       return left(new WrongCredentialsError());
     }
 
-    const accessToken = await this.encrypter.encrypt({
+    const accessToken = this.encrypter.encrypt({
       sub: student.id.toString(),
     });
 
