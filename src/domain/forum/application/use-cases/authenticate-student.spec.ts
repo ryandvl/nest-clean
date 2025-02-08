@@ -27,7 +27,7 @@ describe('Authenticate Student', () => {
   it('should be able to authenticate a student', async () => {
     const student = makeStudent({
       email: FakeUser.email,
-      password: fakeHasher.hash(FakeUser.password),
+      password: await fakeHasher.hash(FakeUser.password),
     });
 
     inMemoryStudentsRepository.items.push(student);

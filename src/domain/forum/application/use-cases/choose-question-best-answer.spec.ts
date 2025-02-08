@@ -48,6 +48,8 @@ describe('Choose Question Best Answer', () => {
       authorId: question.authorId.toString(),
     });
 
+    console.log(inMemoryQuestionsRepository.items[0]);
+
     expect(inMemoryQuestionsRepository.items[0].bestAnswerId).toEqual(
       answer.id,
     );

@@ -2,11 +2,11 @@ import { HashComparer } from '@/domain/forum/application/cryptography/hash-compa
 import { HashGenerator } from '@/domain/forum/application/cryptography/hash-generator';
 
 export class FakeHasher implements HashGenerator, HashComparer {
-  hash(plain: string): string {
+  async hash(plain: string) {
     return plain.concat('-hashed');
   }
 
-  compare(plain: string, hash: string): boolean {
+  async compare(plain: string, hash: string) {
     return plain.concat('-hashed') === hash;
   }
 }

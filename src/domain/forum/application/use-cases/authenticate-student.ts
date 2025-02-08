@@ -29,7 +29,7 @@ export class AuthenticateStudentUseCase {
     email,
     password,
   }: AuthenticateStudentUseCaseRequest): Promise<AuthenticateStudentUseCaseResponse> {
-    const student = this.studentsRepository.findByEmail(email);
+    const student = await this.studentsRepository.findByEmail(email);
 
     if (!student) {
       return left(new WrongCredentialsError());

@@ -5,7 +5,7 @@ import { Student } from '@/domain/forum/enterprise/entities/student';
 export class InMemoryStudentsRepository implements StudentsRepository {
   public items: Student[] = [];
 
-  findByEmail(email: string) {
+  async findByEmail(email: string) {
     const student = this.items.find((item) => item.email === email);
 
     if (!student) {
@@ -15,7 +15,7 @@ export class InMemoryStudentsRepository implements StudentsRepository {
     return student;
   }
 
-  create(student: Student) {
+  async create(student: Student) {
     this.items.push(student);
 
     DomainEvents.dispatchEventsForAggregate(student.id);

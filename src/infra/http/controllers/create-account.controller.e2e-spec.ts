@@ -21,15 +21,21 @@ describe('Create account (E2E)', () => {
   });
 
   test('[POST] /accounts', async () => {
+    const userInformations = {
+      name: 'ryandvl',
+      email: 'ryandvl@example.com',
+      password: '123456',
+    };
+
     const response = await request(app.getHttpServer())
       .post('/accounts')
-      .send(FakeUser);
+      .send(userInformations);
 
     expect(response.statusCode).toBe(201);
 
     const userOnDatabase = await prisma.user.findUnique({
       where: {
-        email: FakeUser.email,
+        email: userInformations.email,
       },
     });
 

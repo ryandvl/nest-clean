@@ -31,7 +31,6 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
     return question;
   }
 
-  // eslint-disable-next-line @typescript-eslint/require-await
   async findManyRecent({ page }: PaginationParams) {
     const questions = this.items
       .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())

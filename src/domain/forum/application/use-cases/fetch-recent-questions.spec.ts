@@ -17,7 +17,7 @@ describe('Fetch Recent Questions', () => {
     sut = new FetchRecentQuestionsUseCase(inMemoryQuestionsRepository);
   });
 
-  it('should be able to fetch recent questions', () => {
+  it('should be able to fetch recent questions', async () => {
     inMemoryQuestionsRepository.create(
       makeQuestion({ createdAt: new Date(2022, 0, 20) }),
     );
@@ -28,7 +28,7 @@ describe('Fetch Recent Questions', () => {
       makeQuestion({ createdAt: new Date(2022, 0, 23) }),
     );
 
-    const result = sut.execute({
+    const result = await sut.execute({
       page: 1,
     });
 
@@ -39,12 +39,12 @@ describe('Fetch Recent Questions', () => {
     ]);
   });
 
-  it('should be able to fetch paginated recent questions', () => {
+  it('should be able to fetch paginated recent questions', async () => {
     for (let i = 1; i <= 22; i++) {
       inMemoryQuestionsRepository.create(makeQuestion());
     }
 
-    const result = sut.execute({
+    const result = await sut.execute({
       page: 2,
     });
 
