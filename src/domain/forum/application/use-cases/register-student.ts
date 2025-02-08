@@ -30,14 +30,13 @@ export class RegisterStudentUseCase {
     email,
     password,
   }: RegisterStudentUseCaseRequest): Promise<RegisterStudentUseCaseResponse> {
-    const studentWithSameEmail =
-      await this.studentsRepository.findByEmail(email);
+    const studentWithSameEmail = this.studentsRepository.findByEmail(email);
 
     if (studentWithSameEmail) {
       return left(new StudentAlreadyExistsError(email));
     }
 
-    const hashedPassword = this.hashGenerator.hash(password);
+    const hashedPassword = await this.hashGenerator.hash(password);
 
     const student = Student.create({
       name,
@@ -45,7 +44,7 @@ export class RegisterStudentUseCase {
       password: hashedPassword,
     });
 
-    await this.studentsRepository.create(student);
+    this.studentsRepository.create(student);
 
     return right({
       student,

@@ -29,13 +29,13 @@ export class AuthenticateStudentUseCase {
     email,
     password,
   }: AuthenticateStudentUseCaseRequest): Promise<AuthenticateStudentUseCaseResponse> {
-    const student = await this.studentsRepository.findByEmail(email);
+    const student = this.studentsRepository.findByEmail(email);
 
     if (!student) {
       return left(new WrongCredentialsError());
     }
 
-    const isPasswordValid = this.hashComparer.compare(
+    const isPasswordValid = await this.hashComparer.compare(
       password,
       student.password,
     );
@@ -44,7 +44,7 @@ export class AuthenticateStudentUseCase {
       return left(new WrongCredentialsError());
     }
 
-    const accessToken = this.encrypter.encrypt({
+    const accessToken = await this.encrypter.encrypt({
       sub: student.id.toString(),
     });
 
