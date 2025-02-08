@@ -38,7 +38,24 @@ Authorization: Bearer {{authToken}}
 
 ###
 
+# @name create_question_without_token
+POST {{BASE_URL}}/questions
+Content-Type: application/json
+
+{
+  "title": "New question 3",
+  "content": "Question content"
+}
+
+###
+
 # @name fetch_recent_questions
 GET {{BASE_URL}}/questions?page=1
 Content-Type: application/json
-Authorization: Bearer {{authToken}}
+Authorization: Bearer {{authToken}} 
+
+###
+
+# @name fetch_recent_questions_without_token
+GET {{BASE_URL}}/questions?page=1
+Content-Type: application/json
