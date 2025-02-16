@@ -2,11 +2,11 @@ import { PaginationParams } from '@/core/repositories/pagination-params';
 import { AnswerComment } from '@/domain/forum/enterprise/entities/answer-comment';
 
 export interface AnswerCommentsRepository {
-  findById(id: string): AnswerComment | null;
+  findById(id: string): Promise<AnswerComment | null>;
   findManyByAnswerId(
     answerId: string,
     params: PaginationParams,
-  ): AnswerComment[];
-  create(answerComment: AnswerComment): void;
-  delete(answerComment: AnswerComment): void;
+  ): Promise<AnswerComment[]>;
+  create(answerComment: AnswerComment): Promise<void>;
+  delete(answerComment: AnswerComment): Promise<void>;
 }
